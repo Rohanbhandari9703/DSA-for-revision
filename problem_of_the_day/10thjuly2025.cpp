@@ -42,52 +42,53 @@ public:
     }
 };
 //revision notes:-(chatgpt generated)
-Build Free Time Array:
+// Build Free Time Array:
 
-freeArray[0] = startTime[0] → time before the first meeting.
+// freeArray[0] = startTime[0] → time before the first meeting.
 
-freeArray[i] = startTime[i] - endTime[i-1] → gap between consecutive meetings.
+// freeArray[i] = startTime[i] - endTime[i-1] → gap between consecutive meetings.
 
-freeArray[n] = eventTime - endTime[n-1] → time after the last meeting.
+// freeArray[n] = eventTime - endTime[n-1] → time after the last meeting.
 
-Initialize Two Arrays:
+// Initialize Two Arrays:
 
-maxLeftFree[i]: max free time block on the left of index i.
+// maxLeftFree[i]: max free time block on the left of index i.
 
-maxRightFree[i]: max free time block on the right of index i.
+// maxRightFree[i]: max free time block on the right of index i.
 
-Fill maxRightFree[] from right to left:
 
-cpp
-Copy code
-for i = n-2 to 0:
-    maxRightFree[i] = max(maxRightFree[i+1], freeArray[i+1])
-Fill maxLeftFree[] from left to right:
+// Fill maxRightFree[] from right to left:
 
-cpp
-Copy code
-for i = 1 to n-1:
-    maxLeftFree[i] = max(maxLeftFree[i-1], freeArray[i-1])
-Check Each Meeting (indexed as i-1):
+// cpp
+// Copy code
+// for i = n-2 to 0:
+//     maxRightFree[i] = max(maxRightFree[i+1], freeArray[i+1])
+// Fill maxLeftFree[] from left to right:
 
-Compute currEventTime = endTime[i-1] - startTime[i-1].
+// cpp
+// Copy code
+// for i = 1 to n-1:
+//     maxLeftFree[i] = max(maxLeftFree[i-1], freeArray[i-1])
+// Check Each Meeting (indexed as i-1):
 
-If this meeting duration fits in max of maxLeftFree[i-1] or maxRightFree[i], consider this triplet:
+// Compute currEventTime = endTime[i-1] - startTime[i-1].
 
-cpp
-Copy code
-total = freeArray[i-1] + currEventTime + freeArray[i]
-Also check combination of just two adjacent free blocks:
+// If this meeting duration fits in max of maxLeftFree[i-1] or maxRightFree[i], consider this triplet:
 
-cpp
-Copy code
-total = freeArray[i-1] + freeArray[i]
-Update result = max(result, total)
+// cpp
+// Copy code
+// total = freeArray[i-1] + currEventTime + freeArray[i]
+// Also check combination of just two adjacent free blocks:
 
-Return the final result.
+// cpp
+// Copy code
+// total = freeArray[i-1] + freeArray[i]
+// Update result = max(result, total)
 
-⏱️ Time Complexity:
-O(n) – One pass for freeArray, and one each for left/right max computation.
+// Return the final result.
 
-📦 Space Complexity:
-O(n) – For freeArray, maxLeftFree, maxRightFree.
+// ⏱️ Time Complexity:
+// O(n) – One pass for freeArray, and one each for left/right max computation.
+
+// 📦 Space Complexity:
+// O(n) – For freeArray, maxLeftFree, maxRightFree.
